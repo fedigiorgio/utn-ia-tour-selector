@@ -10,7 +10,9 @@ namespace G11.TourSelector.Domain.Entities
 
         public int Name { get; set; }
 
-        public TimeSpan Schedule { get; set; }
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
 
         public IEnumerable<Category> Categories { get; set; }
 
