@@ -11,13 +11,14 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
     {
         private static Random _random = new Random();
         private readonly IList<Activity> _activities;
-        private IList<Activity> _tour;
 
         public TourChromosome(IList<Activity> activities)
         {
             _activities = activities;
             Generate();
         }
+
+        public IList<Activity> Tour { get; private set; }
 
         public override IChromosome Clone()
         {
@@ -28,33 +29,47 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
 
         public override void Crossover(IChromosome pair)
         {
-            throw new System.NotImplementedException();
+            var otherChromsome = pair as TourChromosome; // TODO: Checkear si no se puede utilizar un ChromosomeBase<T> u otra clase base para evitar estos casteos.
+            for (int i = 0; i < Tour.Count; i++)
+            {
+                var shouldSwitch = _random.Next(2) == 1; 
+
+                if (shouldSwitch)
+                {
+                    var activity = otherChromsome.Tour[i];
+                    var index = Tour.IndexOf(activity);
+                    var auxActivity = Tour[i];
+                    Tour[i] = activity;
+                    Tour[index] = auxActivity;
+                }
+            }
+
         }
 
         public override void Generate()
         {
-            _tour = new List<Activity>(_activities);
-            var n = _tour.Count;
+            Tour = new List<Activity>(_activities);
+            var n = Tour.Count;
 
             while (n > 1)
             {
                 n--;
                 var randomIndex = _random.Next(n + 1);
-                var activity = _tour[randomIndex];
-                _tour[randomIndex] = _tour[n];
-                _tour[n] = activity;
+                var activity = Tour[randomIndex];
+                Tour[randomIndex] = Tour[n];
+                Tour[n] = activity;
             }
         }
 
         public override void Mutate()
         {
-            var maxValue = _tour.Count - 1;
+            var maxValue = Tour.Count;
             var randomIndex1 = _random.Next(maxValue);
             var randomIndex2 = _random.Next(maxValue);
 
-            var activity = _tour[randomIndex1];
-            _tour[randomIndex1] = _tour[randomIndex2];
-            _tour[randomIndex2] = activity;
+            var activity = Tour[randomIndex1];
+            Tour[randomIndex1] = Tour[randomIndex2];
+            Tour[randomIndex2] = activity;
         }
     }
 }
