@@ -19,19 +19,12 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
             Generate();
         }
 
-        public TourChromosome()
-        {
-        }
-
         public override IChromosome Clone()
         {
             throw new System.NotImplementedException();
         }
 
-        public override IChromosome CreateNew()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override IChromosome CreateNew() => new TourChromosome(_activities);
 
         public override void Crossover(IChromosome pair)
         {
@@ -40,19 +33,28 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
 
         public override void Generate()
         {
-            _tour = new List<Activity>();
-            var count = _activities.Count;
+            _tour = new List<Activity>(_activities);
+            var n = _tour.Count;
 
-            for (int i = 0; i < count; i++)
+            while (n > 1)
             {
-                var randomPosition = _random.Next(count - i);
-                _tour.Insert(i, _activities[randomPosition]);
+                n--;
+                var randomIndex = _random.Next(n + 1);
+                var activity = _tour[randomIndex];
+                _tour[randomIndex] = _tour[n];
+                _tour[n] = activity;
             }
         }
 
         public override void Mutate()
         {
-            throw new System.NotImplementedException();
+            var maxValue = _tour.Count - 1;
+            var randomIndex1 = _random.Next(maxValue);
+            var randomIndex2 = _random.Next(maxValue);
+
+            var activity = _tour[randomIndex1];
+            _tour[randomIndex1] = _tour[randomIndex2];
+            _tour[randomIndex2] = activity;
         }
     }
 }
