@@ -1,6 +1,7 @@
 ﻿using Accord.Genetic;
 
 using G11.TourSelector.Domain.Entities;
+using G11.TourSelector.Domain.Repositories;
 
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,32 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
     public class TourChromosome : ChromosomeBase
     {
         private static Random _random = new Random();
-        private readonly IList<Activity> _activities;
+        private readonly IActivityRepository _repository;
 
-        public TourChromosome(IList<Activity> activities)
+        public TourChromosome(IActivityRepository repository)
         {
-            _activities = activities;
+            _repository = repository;
             Generate();
+        }
+
+        public TourChromosome(IActivityRepository repository, IList<Activity> tour)
+        {
+            _repository = repository;
+            Tour = tour;
         }
 
         public IList<Activity> Tour { get; private set; }
 
-        public override IChromosome Clone()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override IChromosome Clone() => new TourChromosome(_repository, Tour);
 
-        public override IChromosome CreateNew() => new TourChromosome(_activities);
+        public override IChromosome CreateNew() => new TourChromosome(_repository);
 
         public override void Crossover(IChromosome pair)
         {
             var otherChromsome = pair as TourChromosome; // TODO: Checkear si no se puede utilizar un ChromosomeBase<T> u otra clase base para evitar estos casteos.
             for (int i = 0; i < Tour.Count; i++)
             {
-                var shouldSwitch = _random.Next(2) == 1; 
+                var shouldSwitch = _random.Next(2) == 1; // 50% de probabilidades de cruza.
 
                 if (shouldSwitch)
                 {
@@ -43,12 +47,11 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
                     Tour[index] = auxActivity;
                 }
             }
-
         }
 
         public override void Generate()
         {
-            Tour = new List<Activity>(_activities);
+            Tour = new List<Activity>(_repository.Get());
             var n = Tour.Count;
 
             while (n > 1)
