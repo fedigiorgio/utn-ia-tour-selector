@@ -21,7 +21,7 @@ namespace G11.TourSelector.ConsoleApp
 
             WriteParameters(interests, start, end);
 
-            Console.WriteLine("---------------ACTIVIDADES SELECCIONADAS---------------");
+            Console.WriteLine("---------------ACTIVIDADES DISPONIBLES---------------");
             var repository = new ActivityRepository();
             WriteActivities(repository.Get());
 
