@@ -4,12 +4,15 @@ using G11.TourSelector.Domain.Entities;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace G11.TourSelector.Domain.GeneticAlgorithm
 {
     public class TourFitnessFunction : IFitnessFunction
     {
+        private const int CommonInterestsMultiplier = 30;
+        private const int DistanceMultiplier = 10;
+        private const int PenaltyInvalidPair = 1000;
+
         private readonly IEnumerable<Category> _interests;
         private readonly DateTime _startDateAvailability;
         private readonly DateTime _endDateAvailability;
@@ -27,31 +30,27 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
         {
             var tourChromosome = chromosome as TourChromosome;
             var tour = tourChromosome.Tour;
-            bool hasAtLeastAValidPair = false;
             double score = 0;
-            var activitiesInCommon = tour
-                .Where(a => a.IsRange(_startDateAvailability, _endDateAvailability))
-                .Where(a => a.HasCategoriesInCommon(_interests)).ToList();
 
-            for (int i = 0; i < (activitiesInCommon.Count - 1); i++)
+            for (int i = 0; i < (tour.Count - 1); i++)
             {
-                var activity = activitiesInCommon[i];
-                var nextActivity = activitiesInCommon[i + 1];
+                var activity = tour[i];
+                var nextActivity = tour[i + 1];
 
                 var activityHappensBeforeNextActivity = activity.HappensBefore(nextActivity);
+                var activityIsInRange = activity.IsRange(_startDateAvailability, _endDateAvailability);
 
-                if (activityHappensBeforeNextActivity)
+                if (activityHappensBeforeNextActivity && activityIsInRange)
+                {   
+                    score -= activity.Neighborhood.Distance(nextActivity.Neighborhood) * DistanceMultiplier;
+                    score += activity.CategoriesInCommon(_interests) * CommonInterestsMultiplier;
+                }
+                else
                 {
-                    hasAtLeastAValidPair = true;
-                    score -= activity.Neighborhood.Distance(nextActivity.Neighborhood);
-                    score += activity.CategoriesInCommon(_interests);
+                    score -= PenaltyInvalidPair;
                 }
             }
 
-            if (!hasAtLeastAValidPair)
-            {
-                score = double.MinValue;
-            }
 
             return score;
         }

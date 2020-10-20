@@ -6,7 +6,6 @@ using G11.TourSelector.Domain.Repositories;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace G11.TourSelector.ConsoleApp
 {
@@ -23,9 +22,9 @@ namespace G11.TourSelector.ConsoleApp
 
             Console.WriteLine("---------------ACTIVIDADES DISPONIBLES---------------");
             var repository = new ActivityRepository();
+            var numberOfActivities = 3;
             WriteActivities(repository.Get());
-
-            var population = new Population(1000, new TourChromosome(repository),
+            var population = new Population(10, new TourChromosome(repository, numberOfActivities),
                      new TourFitnessFunction(interests, start, end), new EliteSelection());
 
             int i = 0;
@@ -34,8 +33,14 @@ namespace G11.TourSelector.ConsoleApp
             {
                 population.RunEpoch();
                 i++;
-                if (population.FitnessMax >= 0.99 || i >= 1000)
+                Console.WriteLine("---------------INFO EPOCH---------------");
+                Console.WriteLine($"Epoch: {i}");
+                Console.WriteLine($"FitnessMax: {population.FitnessMax}");
+                Console.WriteLine($"FitnessAvg: {population.FitnessAvg}");
+                if (population.FitnessMax >= 50 || i >= 1000)
                 {
+                    Console.WriteLine("---------------NUMERO DE EPOCHS---------------");
+                    Console.WriteLine(i);
                     break;
                 }
             }
@@ -43,11 +48,10 @@ namespace G11.TourSelector.ConsoleApp
             var best = population.BestChromosome as TourChromosome;
             var tour = best.Tour;
 
-            var activities = tour.Where(a => a.IsRange(start, end))
-                .Where(a => a.HasCategoriesInCommon(interests)).ToList();
 
             Console.WriteLine("---------------ACTIVIDADES SELECCIONADAS---------------");
-            WriteActivities(activities);
+            Console.WriteLine(best.Fitness);
+            WriteActivities(tour);
         }
 
         static void WriteParameters(List<Category> interests, DateTime start, DateTime end)
