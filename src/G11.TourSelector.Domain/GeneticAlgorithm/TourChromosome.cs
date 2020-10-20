@@ -5,7 +5,6 @@ using G11.TourSelector.Domain.Repositories;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace G11.TourSelector.Domain.GeneticAlgorithm
 {
@@ -13,12 +12,12 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
     {
         private static Random _random = new Random();
         private readonly IActivityRepository _repository;
-        private int amountOfActivities;
+        private readonly int _amountOfActivities;
 
         public TourChromosome(IActivityRepository repository, int amountOfActivities)
         {
             _repository = repository;
-            this.amountOfActivities = amountOfActivities;
+            _amountOfActivities = amountOfActivities;
             Generate();
         }
 
@@ -26,14 +25,14 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
         {
             _repository = repository;
             Tour = tour;
-            this.amountOfActivities = amountOfActivities; 
+           _amountOfActivities = amountOfActivities; 
         }
 
         public IList<Activity> Tour { get; private set; }
 
-        public override IChromosome Clone() => new TourChromosome(_repository, Tour, amountOfActivities);
+        public override IChromosome Clone() => new TourChromosome(_repository, Tour, _amountOfActivities);
 
-        public override IChromosome CreateNew() => new TourChromosome(_repository, amountOfActivities);
+        public override IChromosome CreateNew() => new TourChromosome(_repository, _amountOfActivities);
 
         public override void Crossover(IChromosome pair)
         {
@@ -47,10 +46,8 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
                 {
                     var activity = otherChromsome.Tour[i];
                     SwitchActivity(i, activity);
-
                 }
             }
-            SortTour();
         }
 
         private void SwitchActivity(int i, Activity activity)
@@ -65,34 +62,29 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
 
         public override void Generate()
         {
+            var totalActivities = _repository.Get();
+            var hashSetTour = new HashSet<Activity>();
 
-            var totalRepository = _repository.Get().Count;
-            var HashTour = new HashSet<Activity>();
-
-            while (HashTour.Count != this.amountOfActivities)
+            while (hashSetTour.Count < _amountOfActivities)
             {
-                var randomIndex = _random.Next(totalRepository - 1);
-                var activity = _repository.Get()[randomIndex];
-                HashTour.Add(activity);
+                var randomIndex = _random.Next(totalActivities.Count - 1);
+                var randomActivity = totalActivities[randomIndex];
+                hashSetTour.Add(randomActivity);
             }
-            Tour = new List<Activity>(HashTour);
-            SortTour();
-        }
 
-        private void SortTour()
-        {
-            Tour = Tour.OrderBy(activity => activity.StartDate.ToLocalTime()).ThenBy(activity => activity.EndDate.ToLocalTime()).ToList<Activity>();
+            Tour = new List<Activity>(hashSetTour);
         }
 
         public override void Mutate()
         {
+            var totalActivities = _repository.Get();
             var maxValue = Tour.Count;
-            var randomIndex1 = _random.Next(_repository.Get().Count);
+
+            var randomIndex1 = _random.Next(totalActivities.Count);
             var randomIndex2 = _random.Next(maxValue);
 
-            var activity = _repository.Get()[randomIndex1];
+            var activity = totalActivities[randomIndex1];
             SwitchActivity(randomIndex2, activity);
-            SortTour();
         }
     }
 }

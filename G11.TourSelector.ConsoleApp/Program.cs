@@ -6,7 +6,6 @@ using G11.TourSelector.Domain.Repositories;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace G11.TourSelector.ConsoleApp
 {
@@ -23,13 +22,10 @@ namespace G11.TourSelector.ConsoleApp
 
             Console.WriteLine("---------------ACTIVIDADES DISPONIBLES---------------");
             var repository = new ActivityRepository();
-            WriteActivities(repository.Get());
-            var commonInterestsMultiplier = 10.0;
-            var distanceMultiplier = 3.0;
-            var penaltyInvalidPair = 5.0;
             var numberOfActivities = 3;
-            var population = new Population(1000, new TourChromosome(repository, numberOfActivities),
-                     new TourFitnessFunction(interests, start, end, commonInterestsMultiplier, distanceMultiplier, penaltyInvalidPair), new EliteSelection());
+            WriteActivities(repository.Get());
+            var population = new Population(10, new TourChromosome(repository, numberOfActivities),
+                     new TourFitnessFunction(interests, start, end), new EliteSelection());
 
             int i = 0;
 
@@ -52,10 +48,9 @@ namespace G11.TourSelector.ConsoleApp
             var best = population.BestChromosome as TourChromosome;
             var tour = best.Tour;
 
-            var activities = tour.Where(a => a.IsRange(start, end))
-                .Where(a => a.HasCategoriesInCommon(interests)).ToList();
 
             Console.WriteLine("---------------ACTIVIDADES SELECCIONADAS---------------");
+            Console.WriteLine(best.Fitness);
             WriteActivities(tour);
         }
 

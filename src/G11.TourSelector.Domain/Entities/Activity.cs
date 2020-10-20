@@ -24,11 +24,6 @@ namespace G11.TourSelector.Domain.Entities
             return StartDate >= startDateAvailability && EndDate < endDateAvailability;
         }
 
-        public bool HasCategoriesInCommon(IEnumerable<Category> otherCategories)
-        {
-            return Categories.Any(c => otherCategories.Contains(c));
-        }
-
         public int CategoriesInCommon(IEnumerable<Category> otherCategories)
         {
             return Categories.Intersect(otherCategories).Count();

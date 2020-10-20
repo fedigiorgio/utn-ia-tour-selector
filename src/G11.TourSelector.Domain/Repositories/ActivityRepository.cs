@@ -34,7 +34,7 @@ namespace G11.TourSelector.Domain.Repositories
                         PosX = 0,
                         PosY = 1
                     },
-                    StartDate = _now.AddHours(10),
+                    StartDate = _now.AddHours(10).AddMinutes(30),
                     EndDate = _now.AddHours(13),
                     Name = "El Viejo Almacén Tango.",
                     Categories = new List<Category>
