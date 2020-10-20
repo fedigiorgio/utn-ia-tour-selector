@@ -24,9 +24,12 @@ namespace G11.TourSelector.ConsoleApp
             Console.WriteLine("---------------ACTIVIDADES DISPONIBLES---------------");
             var repository = new ActivityRepository();
             WriteActivities(repository.Get());
-
-            var population = new Population(1000, new TourChromosome(repository),
-                     new TourFitnessFunction(interests, start, end), new EliteSelection());
+            var commonInterestsMultiplier = 10.0;
+            var distanceMultiplier = 3.0;
+            var penaltyInvalidPair = 5.0;
+            var numberOfActivities = 3;
+            var population = new Population(1000, new TourChromosome(repository, numberOfActivities),
+                     new TourFitnessFunction(interests, start, end, commonInterestsMultiplier, distanceMultiplier, penaltyInvalidPair), new EliteSelection());
 
             int i = 0;
 

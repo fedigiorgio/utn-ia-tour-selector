@@ -13,14 +13,21 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
         private readonly IEnumerable<Category> _interests;
         private readonly DateTime _startDateAvailability;
         private readonly DateTime _endDateAvailability;
-
+        private readonly double _commonInterestsMultiplier, _distanceMultiplier, _penaltyInvalidPair;
         public TourFitnessFunction(IEnumerable<Category> interests,
             DateTime startDateAvailability,
-            DateTime endDateAvailability)
+            DateTime endDateAvailability,
+            double commonInterestsMultiplier,
+            double distanceMultiplier,
+            double penaltyInvalidPair
+            )
         {
             _interests = interests;
             _startDateAvailability = startDateAvailability;
             _endDateAvailability = endDateAvailability;
+            _commonInterestsMultiplier = commonInterestsMultiplier;
+            _distanceMultiplier = distanceMultiplier;
+            _penaltyInvalidPair = penaltyInvalidPair;
         }
 
         public double Evaluate(IChromosome chromosome)
@@ -43,8 +50,12 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
                 if (activityHappensBeforeNextActivity)
                 {
                     hasAtLeastAValidPair = true;
-                    score -= activity.Neighborhood.Distance(nextActivity.Neighborhood);
-                    score += activity.CategoriesInCommon(_interests);
+                    score -= activity.Neighborhood.Distance(nextActivity.Neighborhood) * _distanceMultiplier;
+                    score += activity.CategoriesInCommon(_interests) * _commonInterestsMultiplier;
+                }
+                else
+                {
+                    score -= _penaltyInvalidPair;
                 }
             }
 
