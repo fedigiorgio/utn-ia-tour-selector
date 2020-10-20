@@ -37,8 +37,14 @@ namespace G11.TourSelector.ConsoleApp
             {
                 population.RunEpoch();
                 i++;
-                if (population.FitnessMax >= 0.99 || i >= 1000)
+                Console.WriteLine("---------------INFO EPOCH---------------");
+                Console.WriteLine($"Epoch: {i}");
+                Console.WriteLine($"FitnessMax: {population.FitnessMax}");
+                Console.WriteLine($"FitnessAvg: {population.FitnessAvg}");
+                if (population.FitnessMax >= 50 || i >= 1000)
                 {
+                    Console.WriteLine("---------------NUMERO DE EPOCHS---------------");
+                    Console.WriteLine(i);
                     break;
                 }
             }
@@ -50,7 +56,7 @@ namespace G11.TourSelector.ConsoleApp
                 .Where(a => a.HasCategoriesInCommon(interests)).ToList();
 
             Console.WriteLine("---------------ACTIVIDADES SELECCIONADAS---------------");
-            WriteActivities(activities);
+            WriteActivities(tour);
         }
 
         static void WriteParameters(List<Category> interests, DateTime start, DateTime end)
