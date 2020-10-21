@@ -6,6 +6,7 @@ using G11.TourSelector.Domain.Repositories;
 
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace G11.TourSelector.ConsoleApp
 {
@@ -13,8 +14,22 @@ namespace G11.TourSelector.ConsoleApp
     {
         static void Main(string[] args)
         {
+            string categories;
+            var interests = new List<Category>();
+            Console.WriteLine("---------------SELECCIONAR CATEGORIAS-------------");
+            Console.WriteLine("1. GASTRONOMIA");
+            Console.WriteLine("2. HISTORIA");
+            Console.WriteLine("3. MUSICA");
+            Console.WriteLine("4. DEPORTES");
+            
+            categories = Console.ReadLine();
+            while (!categories.Equals("exit")) {
+                interests.Add((Category) int.Parse(categories));
+                categories = Console.ReadLine();
+            }
+
             Console.WriteLine("---------------PARAMETROS---------------");
-            var interests = new List<Category> { Category.Sports, Category.Historic, Category.Music };
+            //var interests = new List<Category> { Category.Sports, Category.Historic, Category.Music };
             var start = DateTime.Now.Date.AddHours(9);
             var end = DateTime.Now.Date.AddHours(17);
 
