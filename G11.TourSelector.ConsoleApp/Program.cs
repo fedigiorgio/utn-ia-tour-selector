@@ -21,9 +21,10 @@ namespace G11.TourSelector.ConsoleApp
             Console.WriteLine("2. HISTORIA");
             Console.WriteLine("3. MUSICA");
             Console.WriteLine("4. DEPORTES");
+            Console.WriteLine("0. PARA INICIAR");
             
             categories = Console.ReadLine();
-            while (!categories.Equals("exit")) {
+            while (!categories.Equals("0")) {
                 interests.Add((Category) int.Parse(categories));
                 categories = Console.ReadLine();
             }
