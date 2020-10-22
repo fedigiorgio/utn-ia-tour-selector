@@ -19,9 +19,9 @@ namespace G11.TourSelector.Domain.Entities
 
         public Neighborhood Neighborhood { get; set; }
 
-        public bool IsRange(DateTime startDateAvailability, DateTime endDateAvailability)
+        public bool IsInRange(DateTime startDateAvailability, DateTime endDateAvailability)
         {
-            return StartDate >= startDateAvailability && EndDate <= endDateAvailability;
+            return StartDate >= startDateAvailability && EndDate < endDateAvailability;
         }
 
         public int CategoriesInCommon(IEnumerable<Category> otherCategories)
@@ -31,7 +31,7 @@ namespace G11.TourSelector.Domain.Entities
 
         public bool HappensBefore(Activity nextActivity)
         {
-            return EndDate <= nextActivity.StartDate;
+            return EndDate < nextActivity.StartDate;
         }
 
         public override string ToString()

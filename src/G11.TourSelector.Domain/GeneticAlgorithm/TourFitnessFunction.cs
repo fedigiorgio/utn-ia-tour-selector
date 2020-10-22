@@ -38,7 +38,7 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
                 var nextActivity = tour[i + 1];
 
                 var activityHappensBeforeNextActivity = activity.HappensBefore(nextActivity);
-                var activityIsInRange = activity.IsRange(_startDateAvailability, _endDateAvailability);
+                var activityIsInRange = activity.IsInRange(_startDateAvailability, _endDateAvailability);
 
                 if (activityHappensBeforeNextActivity && activityIsInRange)
                 {   
