@@ -72,7 +72,7 @@ namespace G11.TourSelector.ConsoleApp
         private static void LoadPopulation()
         {
             _population = new Population(_initialPopulation, new TourChromosome(_repository, _numberOfActivities),
-                new TourFitnessFunction(_categories, _start, _end), new EliteSelection());
+                new TourFitnessFunctionWithOverlaps(_categories, _start, _end), new EliteSelection());
         }
 
         private static void LoadAndWriteActivities()

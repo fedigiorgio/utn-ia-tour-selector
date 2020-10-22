@@ -29,6 +29,11 @@ namespace G11.TourSelector.Domain.Entities
             return Categories.Intersect(otherCategories).Count();
         }
 
+        public bool HappensBefore(Activity nextActivity)
+        {
+            return EndDate < nextActivity.StartDate;
+        }
+
         public bool IsOverlap(Activity otherActivity)
         {
             return (otherActivity.StartDate < this.EndDate && otherActivity.StartDate > this.StartDate) 
