@@ -68,6 +68,7 @@ namespace G11.TourSelector.ConsoleApp
             Console.WriteLine("---------------ACTIVIDADES SELECCIONADAS---------------");
             Console.WriteLine(best.Fitness);
             WriteActivities(tour);
+            Console.ReadLine();
         }
 
         static void WriteParameters(List<Category> interests, DateTime start, DateTime end)
