@@ -24,8 +24,8 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
         public TourChromosome(IActivityRepository repository, IList<Activity> tour, int amountOfActivities)
         {
             _repository = repository;
-            Tour = tour;
-           _amountOfActivities = amountOfActivities; 
+            Tour = new List<Activity>(tour);
+           _amountOfActivities = amountOfActivities;
         }
 
         public IList<Activity> Tour { get; private set; }
@@ -37,7 +37,6 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
         public override void Crossover(IChromosome pair)
         {
             var otherChromsome = pair as TourChromosome; // TODO: Checkear si no se puede utilizar un ChromosomeBase<T> u otra clase base para evitar estos casteos.
-
             for (int i = 0; i < Tour.Count; i++)
             {
                 var shouldSwitch = _random.Next(2) == 1; // 50% de probabilidades de cruza.

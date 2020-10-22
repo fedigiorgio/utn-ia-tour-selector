@@ -17,15 +17,16 @@ namespace G11.TourSelector.ConsoleApp
         private static int _numberOfActivities = 3;
         private static int _numberOfEpochs;
         private static int _initialPopulation;
+        private static ActivityRepository _repository;
         private static IList<Activity> _activities;
         private static Population _population;
 
         static void Main(string[] args)
         {
+            LoadAndWriteActivities();
             LoadParameters();
             WriteParameters();
             LoadPopulation();
-            WriteAvailableActivities();
             Run();
             WriteResults();
         }
@@ -70,14 +71,15 @@ namespace G11.TourSelector.ConsoleApp
 
         private static void LoadPopulation()
         {
-            var repository = new ActivityRepository();
-            _activities = repository.Get();
-            _population = new Population(_initialPopulation, new TourChromosome(repository, _numberOfActivities),
+            _population = new Population(_initialPopulation, new TourChromosome(_repository, _numberOfActivities),
                 new TourFitnessFunction(_categories, _start, _end), new EliteSelection());
         }
 
-        private static void WriteAvailableActivities()
+        private static void LoadAndWriteActivities()
         {
+            _repository = new ActivityRepository();
+            _activities = _repository.Get();
+
             Console.WriteLine("---------------ACTIVIDADES DISPONIBLES-------------");
             _activities.WriteInConsole();
         }
