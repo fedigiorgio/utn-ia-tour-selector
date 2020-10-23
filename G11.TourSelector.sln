@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "G11.TourSelector.Domain", "src\G11.TourSelector.Domain\G11.TourSelector.Domain.csproj", "{480DB954-9B49-4CC3-AC4C-FC3DCF84AA3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G11.TourSelector.ConsoleApp", "G11.TourSelector.ConsoleApp\G11.TourSelector.ConsoleApp.csproj", "{5B01118A-233C-48F2-AFA0-D0F109D35A47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G11.TourSelector.ConsoleApp", "src\G11.TourSelector.ConsoleApp\G11.TourSelector.ConsoleApp.csproj", "{5B01118A-233C-48F2-AFA0-D0F109D35A47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

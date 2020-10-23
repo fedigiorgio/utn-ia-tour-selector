@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\G11.TourSelector.Domain\G11.TourSelector.Domain.csproj" />
+    <ProjectReference Include="..\G11.TourSelector.Domain\G11.TourSelector.Domain.csproj" />
   </ItemGroup>
 
 </Project>
