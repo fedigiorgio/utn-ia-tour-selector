@@ -38,6 +38,7 @@ namespace G11.TourSelector.ConsoleApp
             Console.WriteLine("2. HISTORIA");
             Console.WriteLine("3. MUSICA");
             Console.WriteLine("4. DEPORTES");
+            Console.WriteLine("5. CULTURAL");
             Console.WriteLine("0. PARA INICIAR");
 
             _categories = new List<Category>();

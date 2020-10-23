@@ -9,9 +9,9 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
 {
     public class TourFitnessFunction : IFitnessFunction
     {
-        private const int CommonInterestsMultiplier = 30;
-        private const int DistanceMultiplier = 10;
-        private const int PenaltyInvalidPair = 1000;
+        private const int CommonInterestsMultiplier = 600;
+        private const int DistanceMultiplier = 100;
+        private const int PenaltyInvalidPair = 1100;
 
         private readonly IEnumerable<Category> _interests;
         private readonly DateTime _startDateAvailability;

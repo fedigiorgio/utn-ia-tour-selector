@@ -48,7 +48,7 @@ namespace G11.TourSelector.Domain.Repositories
                 {
                     Id = 2,
                     Neighborhood = new Neighborhood
-                    { 
+                    {
                       Id = 2,
                       Name = "Boedo",
                       PosX = 3,
@@ -66,7 +66,7 @@ namespace G11.TourSelector.Domain.Repositories
                 new Activity
                 {
                     Id = 3,
-                    Neighborhood = new Neighborhood 
+                    Neighborhood = new Neighborhood
                     {
                         Id = 3,
                         Name = "Núñez",
@@ -84,9 +84,9 @@ namespace G11.TourSelector.Domain.Repositories
                 new Activity
                 {
                     Id = 4,
-                    Neighborhood = new Neighborhood 
+                    Neighborhood = new Neighborhood
                     {
-                        Id = 4, 
+                        Id = 4,
                         Name = "Monserrat",
                         PosX = 2,
                         PosY = 0
@@ -102,8 +102,8 @@ namespace G11.TourSelector.Domain.Repositories
                 new Activity
                 {
                     Id = 5,
-                    Neighborhood = new Neighborhood 
-                    { 
+                    Neighborhood = new Neighborhood
+                    {
                         Id = 5,
                         Name = "La Boca",
                         PosY = 0,
@@ -116,6 +116,96 @@ namespace G11.TourSelector.Domain.Repositories
                         Category.Sports
                     },
                     Name = "Recorrido cancha y Museo de Boca Juniors."
+                },
+                new Activity
+                {
+                    Id = 6,
+                    Neighborhood = new Neighborhood
+                    {
+                        Id = 6,
+                        Name = "San Cristobal",
+                        PosX = 2,
+                        PosY = 1
+                    },
+                    StartDate = _now.AddHours(14),
+                    EndDate = _now.AddHours(16),
+                    Categories = new List<Category>{ Category.Gastronomic, Category.Historic },
+                    Name = "Visita bar notable: Miramar"
+                },
+                new Activity
+                {
+                    Id = 7,
+                    Neighborhood = new Neighborhood
+                    {
+                        Id = 7,
+                        Name = "Parque Patricios",
+                        PosX = 2,
+                        PosY = 0
+                    },
+                    Categories = new List<Category> { Category.Sports },
+                    StartDate = _now.AddHours(12),
+                    EndDate = _now.AddHours(14),
+                    Name = "Visita a Estadio Tomás Adolfo Ducó"
+                },
+                new Activity
+                {
+                    Id = 8,
+                    Neighborhood = new Neighborhood
+                    {
+                        Id = 8,
+                        Name = "Palermo",
+                        PosX = 4,
+                        PosY = 4,
+                    },
+                    Name = "Visita al jardín japonés",
+                    Categories = new List<Category> { Category.Cultural },
+                    StartDate = _now.Date.AddHours(9),
+                    EndDate = _now.Date.AddHours(11)
+                },
+                new Activity
+                {
+                    Id = 8,
+                    Neighborhood = new Neighborhood
+                    {
+                        Id = 9,
+                        Name = "Tribunales",
+                        PosX = 3,
+                        PosY = 0,
+                    },
+                    Name = "Visita a Pizzeria Guerrin",
+                    Categories = new List<Category> { Category.Gastronomic },
+                    StartDate = _now.Date.AddHours(12),
+                    EndDate = _now.Date.AddHours(14)
+                },
+                new Activity
+                {
+                    Id = 9,
+                    Neighborhood = new Neighborhood
+                    {
+                        Id = 10,
+                        Name = "Palermo",
+                        PosX = 4,
+                        PosY = 4
+                    },
+                    Name = "Visita al Planetario",
+                    Categories = new List<Category> { Category.Cultural },
+                    StartDate = _now.AddHours(15),
+                    EndDate = _now.AddHours(17)
+                },
+                new Activity
+                {
+                    Id = 10,
+                    Neighborhood = new Neighborhood
+                    {
+                        Id = 11,
+                        Name = "Villa Crespo",
+                        PosX = 3,
+                        PosY = 4,
+                    },
+                    Name = "Club Cultural Matienzo",
+                    Categories = new List<Category> { Category.Cultural, Category.Music },
+                    StartDate = _now.AddHours(13),
+                    EndDate = _now.AddHours(14)
                 }
             };
         }

@@ -6,6 +6,6 @@
         Historic,
         Music,
         Sports,
-        Festival
+        Cultural
     }
 }
