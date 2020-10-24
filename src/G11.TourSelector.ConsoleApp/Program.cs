@@ -12,8 +12,8 @@ namespace G11.TourSelector.ConsoleApp
     class Program
     {
         private static IList<Category> _categories;
-        private static DateTime _start = DateTime.Now.Date.AddHours(9);
-        private static DateTime _end = DateTime.Now.Date.AddHours(17);
+        private static DateTime _start;
+        private static DateTime _end;
         private static int _numberOfActivities = 3;
         private static int _numberOfEpochs;
         private static int _initialPopulation;
@@ -50,9 +50,14 @@ namespace G11.TourSelector.ConsoleApp
                 category = Console.ReadLine();
             }
 
+            Console.WriteLine("---------------SELECCIONE HORARIO INICIO-------------");
+            _start = DateTime.Now.Date.AddHours(Convert.ToInt32(Console.ReadLine()));
+            
+            Console.WriteLine("---------------SELECCIONE HORARIO FIN-------------");
+            _end = DateTime.Now.Date.AddHours(Convert.ToInt32(Console.ReadLine()));
+
             Console.WriteLine("---------------SELECCIONE LA CANTIDAD DE CORRIDAS-------------");
             _numberOfEpochs = Convert.ToInt32(Console.ReadLine());
-
 
             Console.WriteLine("---------------SELECCIONE LA POBLACIÓN INICIAL-------------");
             _initialPopulation = Convert.ToInt32(Console.ReadLine());

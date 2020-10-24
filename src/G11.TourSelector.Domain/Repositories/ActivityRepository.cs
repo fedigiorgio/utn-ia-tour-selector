@@ -51,8 +51,8 @@ namespace G11.TourSelector.Domain.Repositories
                     {
                       Id = 2,
                       Name = "Boedo",
-                      PosX = 3,
-                      PosY = 1
+                      PosX = 1,
+                      PosY = 3
                     },
                     StartDate = _now.AddHours(10),
                     EndDate = _now.AddHours(12),
@@ -139,8 +139,8 @@ namespace G11.TourSelector.Domain.Repositories
                     {
                         Id = 7,
                         Name = "Parque Patricios",
-                        PosX = 2,
-                        PosY = 0
+                        PosX = 1,
+                        PosY = 5
                     },
                     Categories = new List<Category> { Category.Sports },
                     StartDate = _now.AddHours(12),
