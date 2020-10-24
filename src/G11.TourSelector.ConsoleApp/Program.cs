@@ -74,6 +74,7 @@ namespace G11.TourSelector.ConsoleApp
         {
             _population = new Population(_initialPopulation, new TourChromosome(_repository, _numberOfActivities),
                 new TourFitnessFunctionWithOverlaps(_categories, _start, _end), new EliteSelection());
+            
         }
 
         private static void LoadAndWriteActivities()
@@ -87,13 +88,20 @@ namespace G11.TourSelector.ConsoleApp
 
         private static void Run()
         {
-            for (int i = 0; i < _numberOfEpochs; i++)
-            {
-                _population.RunEpoch();
-                Console.WriteLine("---------------INFO DE LA CORRIDA---------------");
-                Console.WriteLine($"Corrida Nº: {i}");
-                Console.WriteLine($"FitnessMax: {_population.FitnessMax}");
-                Console.WriteLine($"FitnessAvg: {_population.FitnessAvg}");
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"..\\test.csv"))
+            { 
+                file.WriteLine("Epoch; MaxFitness; AvgFitness");
+                for (int i = 0; i < _numberOfEpochs; i++)
+                {
+                    _population.RunEpoch();
+                    Console.WriteLine("---------------INFO DE LA CORRIDA---------------");
+                    Console.WriteLine($"Epoch Nº: {i}");
+                    Console.WriteLine($"FitnessMax: {_population.FitnessMax}");
+                    Console.WriteLine($"FitnessAvg: {_population.FitnessAvg}");
+
+                    file.WriteLine($"{i}; {_population.FitnessMax}; {_population.FitnessAvg};");
+                }
             }
         }
 
