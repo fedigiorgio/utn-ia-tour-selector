@@ -36,8 +36,8 @@ namespace G11.TourSelector.Domain.Entities
 
         public bool IsOverlap(Activity otherActivity)
         {
-            return (otherActivity.StartDate < this.EndDate && otherActivity.StartDate > this.StartDate) 
-                   || (otherActivity.EndDate > this.StartDate && otherActivity.EndDate < this.EndDate );
+            return (otherActivity.StartDate < this.EndDate && otherActivity.StartDate >= this.StartDate) 
+                   || (otherActivity.EndDate > this.StartDate && otherActivity.EndDate <= this.EndDate );
         }
 
         public override string ToString()
