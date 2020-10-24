@@ -34,8 +34,8 @@ namespace G11.TourSelector.Domain.Repositories
                         PosX = 0,
                         PosY = 1
                     },
-                    StartDate = _now.AddHours(10).AddMinutes(30),
-                    EndDate = _now.AddHours(13),
+                    StartDate = _now.AddHours(10),
+                    EndDate = _now.AddHours(11),
                     Name = "El Viejo Almacén Tango.",
                     Categories = new List<Category>
                     {
@@ -54,7 +54,7 @@ namespace G11.TourSelector.Domain.Repositories
                       PosX = 1,
                       PosY = 3
                     },
-                    StartDate = _now.AddHours(10),
+                    StartDate = _now.AddHours(11),
                     EndDate = _now.AddHours(12),
                     Name = "Bares notables.",
                     Categories = new List<Category>
@@ -74,7 +74,7 @@ namespace G11.TourSelector.Domain.Repositories
                         PosX = 6
                     },
                     StartDate = _now.AddHours(16),
-                    EndDate = _now.AddHours(18),
+                    EndDate = _now.AddHours(17),
                     Categories = new List<Category>
                     {
                         Category.Sports
@@ -92,7 +92,7 @@ namespace G11.TourSelector.Domain.Repositories
                         PosY = 0
                     },
                     StartDate = _now.AddHours(14),
-                    EndDate = _now.AddHours(16),
+                    EndDate = _now.AddHours(15),
                     Categories = new List<Category>
                     {
                         Category.Historic
@@ -127,7 +127,7 @@ namespace G11.TourSelector.Domain.Repositories
                         PosX = 2,
                         PosY = 1
                     },
-                    StartDate = _now.AddHours(14),
+                    StartDate = _now.AddHours(15),
                     EndDate = _now.AddHours(16),
                     Categories = new List<Category>{ Category.Gastronomic, Category.Historic },
                     Name = "Visita bar notable: Miramar"
@@ -143,7 +143,7 @@ namespace G11.TourSelector.Domain.Repositories
                         PosY = 5
                     },
                     Categories = new List<Category> { Category.Sports },
-                    StartDate = _now.AddHours(12),
+                    StartDate = _now.AddHours(13),
                     EndDate = _now.AddHours(14),
                     Name = "Visita a Estadio Tomás Adolfo Ducó"
                 },
@@ -160,7 +160,7 @@ namespace G11.TourSelector.Domain.Repositories
                     Name = "Visita al jardín japonés",
                     Categories = new List<Category> { Category.Cultural },
                     StartDate = _now.Date.AddHours(9),
-                    EndDate = _now.Date.AddHours(11)
+                    EndDate = _now.Date.AddHours(10)
                 },
                 new Activity
                 {
@@ -175,7 +175,7 @@ namespace G11.TourSelector.Domain.Repositories
                     Name = "Visita a Pizzeria Guerrin",
                     Categories = new List<Category> { Category.Gastronomic },
                     StartDate = _now.Date.AddHours(12),
-                    EndDate = _now.Date.AddHours(14)
+                    EndDate = _now.Date.AddHours(13)
                 },
                 new Activity
                 {
@@ -190,7 +190,7 @@ namespace G11.TourSelector.Domain.Repositories
                     Name = "Visita al Planetario",
                     Categories = new List<Category> { Category.Cultural },
                     StartDate = _now.AddHours(15),
-                    EndDate = _now.AddHours(17)
+                    EndDate = _now.AddHours(16)
                 },
                 new Activity
                 {
