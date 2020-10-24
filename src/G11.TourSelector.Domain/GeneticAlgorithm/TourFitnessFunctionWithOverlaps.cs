@@ -40,7 +40,7 @@ namespace G11.TourSelector.Domain.GeneticAlgorithm
 
             double score = 0;
 
-            for (int i = 0; i < (tour.Count - 1); i++)
+            for (int i = 0; i < (tour.Count); i++)
             {
                 var activity = tour[i];
                 Activity previosActivity = tour.Where(x => x.EndDate <= activity.StartDate).OrderByDescending(x => x.EndDate.ToString("yyyyMMdd HH:mm:SS")).FirstOrDefault();
