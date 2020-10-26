@@ -100,7 +100,7 @@ namespace G11.TourSelector.ConsoleApp
                 for (int i = 0; i < _numberOfEpochs; i++)
                 {
                     _population.RunEpoch();
-                    Console.WriteLine("---------------INFO DE LA CORRIDA---------------");
+                    Console.WriteLine("---------------INFO DEL EPOCH---------------");
                     Console.WriteLine($"Epoch Nº: {i}");
                     Console.WriteLine($"FitnessMax: {_population.FitnessMax}");
                     Console.WriteLine($"FitnessAvg: {_population.FitnessAvg}");
@@ -116,6 +116,8 @@ namespace G11.TourSelector.ConsoleApp
             var tour = best.Tour;
             Console.WriteLine("---------------CROMOSOMA SELECCIONADO---------------");
             tour.WriteInConsole();
+            Console.WriteLine("---------------PRESIONE UNA TECLA PARA SALIR---------------");
+            Console.ReadKey();
         }
     }
 }
